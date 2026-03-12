@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anna Vytoria ✨</title>
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      min-height:100vh;
+      background:linear-gradient(135deg,#ffdde1,#ee9ca7,#fbc2eb);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;color:#fff;padding:20px;
+    }
+    .hearts{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+    .heart{position:absolute;bottom:-20px;font-size:20px;animation:subir linear infinite;opacity:.75;}
+    @keyframes subir{
+      0%{transform:translateY(0) scale(1);opacity:0;}
+      10%{opacity:.8;}
+      100%{transform:translateY(-110vh) scale(1.4);opacity:0;}
+    }
+    .card{
+      position:relative;z-index:1;width:100%;max-width:700px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.25);
+      backdrop-filter:blur(14px);
+      border-radius:28px;padding:36px 28px;
+      box-shadow:0 20px 60px rgba(0,0,0,.2);
+      text-align:center;animation:aparecer 1s ease;
+    }
+    @keyframes aparecer{
+      from{opacity:0;transform:translateY(20px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+    .emoji{font-size:48px;margin-bottom:14px;animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+    h1{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:12px;}
+    .subtitle{font-size:1.1rem;opacity:.95;margin-bottom:26px;line-height:1.6;}
+    .message{
+      background:rgba(255,255,255,.12);
+      border-radius:20px;padding:22px;line-height:1.8;
+      font-size:1.05rem;margin-bottom:24px;
+    }
+    .highlight{font-weight:bold;color:#fff7b2;}
+    .buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+    button{
+      border:none;padding:14px 22px;border-radius:999px;
+      font-size:1rem;cursor:pointer;transition:.25s ease;font-weight:bold;
+    }
+    .btn-main{background:#fff;color:#d94f70;box-shadow:0 8px 20px rgba(0,0,0,.15);}
+    .btn-main:hover{transform:translateY(-2px) scale(1.03);}
+    .btn-alt{background:transparent;color:white;border:1px solid rgba(255,255,255,.5);}
+    .btn-alt:hover{background:rgba(255,255,255,.12);transform:translateY(-2px);}
+    .hidden-message{
+      margin-top:22px;background:rgba(255,255,255,.14);
+      border-radius:18px;padding:18px;line-height:1.7;
+      display:none;animation:aparecer .5s ease;
+    }
+    footer{margin-top:20px;font-size:.95rem;opacity:.9;}
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="card">
+  <div class="emoji">💖</div>
+  <h1>Anna Vytoria</h1>
+  <p class="subtitle">Fiz essa pagininha só porque você merecia algo diferente ✨</p>
+
+  <div class="message">
+    Desde que comecei a te conhecer, achei muito massa o seu jeito.<br><br>
+    Essa página é só uma forma simples de dizer que 
+    <span class="highlight">eu gostei de te conhecer</span>.
+  </div>
+
+  <div class="buttons">
+    <button class="btn-main" onclick="mostrarMensagem()">Clique aqui 💌</button>
+    <button class="btn-alt" onclick="mudarFrase()">Outra mensagem ✨</button>
+  </div>
+
+  <div class="hidden-message" id="hiddenMessage"></div>
+
+  <footer>Feito especialmente pra você 😄</footer>
+</div>
+
+<script>
+const mensagens=[
+"Você tem uma energia muito bonita.",
+"Tem gente que passa despercebida. Você não é uma dessas pessoas.",
+"Você parece ser alguém que vale a pena conhecer de verdade.",
+"Seu nome já é bonito. Seu jeito consegue ser ainda mais.",
+"Espero que isso te faça sorrir um pouco 😄"
+];
+
+function mostrarMensagem(){
+const box=document.getElementById("hiddenMessage");
+box.style.display="block";
+box.innerHTML="Só passando pra dizer que você é especial, Anna Vytoria 💖";
+}
+
+function mudarFrase(){
+const box=document.getElementById("hiddenMessage");
+const frase=mensagens[Math.floor(Math.random()*mensagens.length)];
+box.style.display="block";
+box.innerHTML=frase;
+}
+
+function criarCoracoes(){
+const container=document.getElementById("hearts");
+
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML=["💖","💕","✨","💗"][Math.floor(Math.random()*4)];
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(4+Math.random()*5)+"s";
+heart.style.fontSize=(16+Math.random()*18)+"px";
+container.appendChild(heart);
+
+setTimeout(()=>{heart.remove();},9000);
+},350);
+}
+
+criarCoracoes();
+</script>
+
+</body>
+</html>
