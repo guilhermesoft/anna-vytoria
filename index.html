@@ -4,127 +4,547 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anna Vytoria ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * {margin:0;padding:0;box-sizing:border-box;}
-    body{
-      font-family:Arial,Helvetica,sans-serif;
-      min-height:100vh;
-      background:linear-gradient(135deg,#ffdde1,#ee9ca7,#fbc2eb);
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;color:#fff;padding:20px;
+    :root {
+      --bg-1: #0f0c29;
+      --bg-2: #302b63;
+      --bg-3: #24243e;
+      --rose: #ff5c8a;
+      --pink: #ff8fb1;
+      --gold: #ffd89b;
+      --soft: rgba(255, 255, 255, 0.10);
+      --soft-2: rgba(255, 255, 255, 0.18);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.82);
+      --shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
     }
-    .hearts{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
-    .heart{position:absolute;bottom:-20px;font-size:20px;animation:subir linear infinite;opacity:.75;}
-    @keyframes subir{
-      0%{transform:translateY(0) scale(1);opacity:0;}
-      10%{opacity:.8;}
-      100%{transform:translateY(-110vh) scale(1.4);opacity:0;}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .card{
-      position:relative;z-index:1;width:100%;max-width:700px;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.25);
-      backdrop-filter:blur(14px);
-      border-radius:28px;padding:36px 28px;
-      box-shadow:0 20px 60px rgba(0,0,0,.2);
-      text-align:center;animation:aparecer 1s ease;
+
+    html {
+      scroll-behavior: smooth;
     }
-    @keyframes aparecer{
-      from{opacity:0;transform:translateY(20px);}
-      to{opacity:1;transform:translateY(0);}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+      overflow-x: hidden;
+      position: relative;
     }
-    .emoji{font-size:48px;margin-bottom:14px;animation:pulse 2s infinite;}
-    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
-    h1{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:12px;}
-    .subtitle{font-size:1.1rem;opacity:.95;margin-bottom:26px;line-height:1.6;}
-    .message{
-      background:rgba(255,255,255,.12);
-      border-radius:20px;padding:22px;line-height:1.8;
-      font-size:1.05rem;margin-bottom:24px;
+
+    .aurora,
+    .aurora::before,
+    .aurora::after {
+      position: fixed;
+      inset: 0;
+      content: '';
+      pointer-events: none;
+      z-index: 0;
     }
-    .highlight{font-weight:bold;color:#fff7b2;}
-    .buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
-    button{
-      border:none;padding:14px 22px;border-radius:999px;
-      font-size:1rem;cursor:pointer;transition:.25s ease;font-weight:bold;
+
+    .aurora {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 92, 138, 0.24), transparent 25%),
+        radial-gradient(circle at 80% 30%, rgba(255, 216, 155, 0.20), transparent 22%),
+        radial-gradient(circle at 50% 80%, rgba(255, 143, 177, 0.20), transparent 25%);
+      filter: blur(10px);
+      animation: glowMove 12s ease-in-out infinite alternate;
     }
-    .btn-main{background:#fff;color:#d94f70;box-shadow:0 8px 20px rgba(0,0,0,.15);}
-    .btn-main:hover{transform:translateY(-2px) scale(1.03);}
-    .btn-alt{background:transparent;color:white;border:1px solid rgba(255,255,255,.5);}
-    .btn-alt:hover{background:rgba(255,255,255,.12);transform:translateY(-2px);}
-    .hidden-message{
-      margin-top:22px;background:rgba(255,255,255,.14);
-      border-radius:18px;padding:18px;line-height:1.7;
-      display:none;animation:aparecer .5s ease;
+
+    .aurora::before {
+      background: radial-gradient(circle at 70% 70%, rgba(255, 92, 138, 0.18), transparent 20%);
+      animation: glowMove 14s ease-in-out infinite alternate-reverse;
     }
-    footer{margin-top:20px;font-size:.95rem;opacity:.9;}
+
+    .aurora::after {
+      background: radial-gradient(circle at 30% 75%, rgba(255, 216, 155, 0.15), transparent 18%);
+      animation: glowMove 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowMove {
+      from { transform: translate3d(-10px, -10px, 0) scale(1); }
+      to { transform: translate3d(10px, 15px, 0) scale(1.08); }
+    }
+
+    .stars,
+    .hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star,
+    .heart {
+      position: absolute;
+      user-select: none;
+      will-change: transform, opacity;
+    }
+
+    .star {
+      width: 2px;
+      height: 2px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255,255,255,0.8);
+      animation: twinkle linear infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.8); }
+    }
+
+    .heart {
+      bottom: -30px;
+      font-size: 18px;
+      opacity: 0.7;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 0 10px rgba(255, 92, 138, 0.4));
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.9) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.75; }
+      100% { transform: translateY(-115vh) scale(1.35) rotate(12deg); opacity: 0; }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 980px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: fadeUp 1.1s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(35px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .hero {
+      padding: 42px 28px 22px;
+      text-align: center;
+      position: relative;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .script {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3rem, 9vw, 6rem);
+      line-height: 1;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 143, 177, 0.22);
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    .divider {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.85), transparent);
+      margin: 26px auto;
+      border-radius: 999px;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      padding: 0 28px 30px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .panel h2 {
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+
+    .letter {
+      line-height: 1.95;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .letter strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .reasons {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .reason {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 14px 15px;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .reason:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.10);
+    }
+
+    .reason span {
+      font-size: 1.2rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .reason p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .highlight-box {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,92,138,0.18), rgba(255,216,155,0.12));
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
+      line-height: 1.85;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose), var(--pink));
+      color: white;
+      box-shadow: 0 14px 30px rgba(255, 92, 138, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .surprise {
+      margin-top: 18px;
+      display: none;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
+      line-height: 1.85;
+      animation: fadeUp 0.5s ease;
+      min-height: 84px;
+    }
+
+    .quote {
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      text-align: center;
+    }
+
+    .quote p {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    .footer {
+      padding: 0 28px 30px;
+      text-align: center;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.95rem;
+    }
+
+    .pulse-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #7dff9d;
+      border-radius: 50%;
+      margin-right: 8px;
+      box-shadow: 0 0 0 rgba(125,255,157,0.6);
+      animation: pulseDot 1.8s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(125,255,157,0.55); }
+      70% { box-shadow: 0 0 0 12px rgba(125,255,157,0); }
+      100% { box-shadow: 0 0 0 0 rgba(125,255,157,0); }
+    }
+
+    @media (max-width: 860px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding: 34px 18px 18px;
+      }
+
+      .content,
+      .footer {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .panel {
+        padding: 18px;
+      }
+
+      .lead,
+      .letter,
+      .reason p,
+      .highlight-box,
+      .surprise {
+        font-size: 0.96rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="aurora"></div>
+  <div class="stars" id="stars"></div>
+  <div class="hearts" id="hearts"></div>
 
-<div class="hearts" id="hearts"></div>
+  <main class="wrapper">
+    <section class="card">
+      <div class="hero">
+        <div class="tag">Aproveita...</div>
+        <h1 class="script">Anna Vytoria</h1>
+        <div class="title">Tem pessoas que simplesmente deixam tudo mais bonito</div>
+        <p class="lead">
+          Eu poderia te mandar só uma mensagem comum... mas a verdade é que <strong>você não me parece uma pessoa comum</strong>.
+          Então eu quis fazer algo diferente, bonito e memorável — do jeitinho que alguém especial merece.
+        </p>
+        <div class="divider"></div>
+      </div>
 
-<div class="card">
-  <div class="emoji">💖</div>
-  <h1>Anna Vytoria</h1>
-  <p class="subtitle">Fiz essa pagininha só porque você merecia algo diferente ✨</p>
+      <div class="content">
+        <div class="panel">
+          <h2>💌 Uma carta pra você</h2>
+          <div class="letter">
+            Desde que comecei a te conhecer, ficou muito claro pra mim que você tem <strong>algo raro</strong>.
+            Não é só beleza, embora isso você tenha de sobra — mas é aquele tipo de presença que chama atenção de um jeito leve, elegante e difícil de explicar.
+            <br><br>
+            Você passa uma energia boa, daquelas que despertam curiosidade, vontade de conversar mais e de continuar descobrindo cada detalhe com calma.
+            <br><br>
+            Essa página é só um jeito diferente de te dizer que <strong>eu gostei muito de te conhecer</strong> e que, entre tantas pessoas, você conseguiu ser alguém que realmente ficou na minha mente.
+            <br><br>
+            Não sei exatamente onde isso tudo pode chegar... mas sei que eu gostaria de viver mais momentos, mais conversas, mais risadas e mais lembranças com você.
+          </div>
 
-  <div class="message">
-    Desde que comecei a te conhecer, achei muito massa o seu jeito.<br><br>
-    Essa página é só uma forma simples de dizer que 
-    <span class="highlight">eu gostei de te conhecer</span>.
-  </div>
+          <div class="highlight-box">
+            <span class="pulse-dot"></span>
+            No momento, existe apenas uma informação importante: <strong>você tem sido uma parte muito bonita dos meus pensamentos</strong>.
+          </div>
 
-  <div class="buttons">
-    <button class="btn-main" onclick="mostrarMensagem()">Clique aqui 💌</button>
-    <button class="btn-alt" onclick="mudarFrase()">Outra mensagem ✨</button>
-  </div>
+          <div class="buttons">
+            <button class="btn-primary" onclick="mostrarSurpresa()">Abrir minha surpresa 💖</button>
+            <button class="btn-secondary" onclick="trocarMensagem()">Ler outra coisa bonita ✨</button>
+          </div>
 
-  <div class="hidden-message" id="hiddenMessage"></div>
+          <div class="surprise" id="surprise"></div>
 
-  <footer>Feito especialmente pra você 😄</footer>
-</div>
+          <div class="quote">
+            <p>“Se isso aqui te arrancar um sorriso, então já valeu a pena.”</p>
+          </div>
+        </div>
 
-<script>
-const mensagens=[
-"Você tem uma energia muito bonita.",
-"Tem gente que passa despercebida. Você não é uma dessas pessoas.",
-"Você parece ser alguém que vale a pena conhecer de verdade.",
-"Seu nome já é bonito. Seu jeito consegue ser ainda mais.",
-"Espero que isso te faça sorrir um pouco 😄"
-];
+        <div class="panel">
+          <h2>🌹 O que torna você especial</h2>
+          <div class="reasons">
+            <div class="reason">
+              <span>✨</span>
+              <p><strong>Seu jeito chama atenção</strong> sem precisar forçar nada. Tem gente que tenta ser marcante; você parece simplesmente conseguir ser.</p>
+            </div>
+            <div class="reason">
+              <span>💫</span>
+              <p><strong>Sua presença é leve</strong>, mas ao mesmo tempo impossível de ignorar. É aquele tipo de combinação que mexe com a gente.</p>
+            </div>
+            <div class="reason">
+              <span>🌙</span>
+              <p><strong>Você desperta curiosidade</strong>. Dá vontade de conversar mais, descobrir mais e entender melhor cada detalhe seu.</p>
+            </div>
+            <div class="reason">
+              <span>💖</span>
+              <p><strong>Você inspirou isso aqui</strong>. E pra alguém inspirar uma página inteira, é porque realmente conseguiu ser diferente.</p>
+            </div>
+          </div>
 
-function mostrarMensagem(){
-const box=document.getElementById("hiddenMessage");
-box.style.display="block";
-box.innerHTML="Só passando pra dizer que você é especial, Anna Vytoria 💖";
-}
+          <div class="highlight-box" style="margin-top:20px;">
+            Em resumo? <strong>você tem aquele tipo de beleza que vai além da aparência</strong> — aparece no jeito, na energia e no impacto que causa.
+          </div>
+        </div>
+      </div>
 
-function mudarFrase(){
-const box=document.getElementById("hiddenMessage");
-const frase=mensagens[Math.floor(Math.random()*mensagens.length)];
-box.style.display="block";
-box.innerHTML=frase;
-}
+      <div class="footer">
+        Feito com carinho, criatividade e um interesse bem sincero em continuar conhecendo você. ❤️
+      </div>
+    </section>
+  </main>
 
-function criarCoracoes(){
-const container=document.getElementById("hearts");
+  <script>
+    const mensagens = [
+      'Você tem um brilho que não precisa de esforço para aparecer. Ele simplesmente acontece.',
+      'No meio de tanta gente comum, você tem aquele tipo de presença que realmente marca.',
+      'Talvez o mais bonito em você seja justamente o conjunto: seu jeito, sua energia e a forma como você desperta curiosidade.',
+      'Tem pessoas que passam pelo dia da gente. Outras conseguem ficar. Você claramente é do segundo tipo.',
+      'Essa página não é exagero. É só uma tentativa honesta de acompanhar o quanto você parece especial.',
+      'Você tem aquela mistura rara de leveza e impacto. E isso definitivamente não passa despercebido.',
+      'Conhecer você tem sido uma daquelas surpresas que deixam tudo mais interessante.'
+    ];
 
-setInterval(()=>{
-const heart=document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML=["💖","💕","✨","💗"][Math.floor(Math.random()*4)];
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(4+Math.random()*5)+"s";
-heart.style.fontSize=(16+Math.random()*18)+"px";
-container.appendChild(heart);
+    function typeWriter(element, text, speed = 28) {
+      element.innerHTML = '';
+      let i = 0;
+      const timer = setInterval(() => {
+        element.innerHTML += text.charAt(i);
+        i++;
+        if (i >= text.length) clearInterval(timer);
+      }, speed);
+    }
 
-setTimeout(()=>{heart.remove();},9000);
-},350);
-}
+    function mostrarSurpresa() {
+      const box = document.getElementById('surprise');
+      box.style.display = 'block';
+      typeWriter(
+        box,
+        'Anna Vytoria, eu só queria que você soubesse que essa página existe por um motivo bem simples: você me pareceu especial o suficiente para merecer algo fora do comum. E sinceramente? Eu quero muito continuar descobrindo o seu sorriso, o seu jeito e a sua companhia.'
+      );
+    }
 
-criarCoracoes();
-</script>
+    function trocarMensagem() {
+      const box = document.getElementById('surprise');
+      const mensagem = mensagens[Math.floor(Math.random() * mensagens.length)];
+      box.style.display = 'block';
+      typeWriter(box, mensagem, 24);
+    }
 
+    function criarEstrelas() {
+      const stars = document.getElementById('stars');
+      for (let i = 0; i < 90; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        const size = Math.random() * 2.6 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.animationDuration = (2 + Math.random() * 4) + 's';
+        star.style.animationDelay = Math.random() * 4 + 's';
+        stars.appendChild(star);
+      }
+    }
+
+    function criarCoracoes() {
+      const container = document.getElementById('hearts');
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = ['💖', '💕', '💗', '✨'][Math.floor(Math.random() * 4)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (5 + Math.random() * 4) + 's';
+        heart.style.fontSize = (15 + Math.random() * 16) + 'px';
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 9500);
+      }, 320);
+    }
+
+    criarEstrelas();
+    criarCoracoes();
+  </script>
 </body>
 </html>
